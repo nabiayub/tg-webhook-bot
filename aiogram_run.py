@@ -1,3 +1,4 @@
+
 import logging
 from aiogram.types import BotCommand,BotCommandScopeDefault
 from aiohttp import web
@@ -12,6 +13,7 @@ async def set_commands() -> None:
 async def on_startup() -> None:
     await set_commands()
 
+    print(f'{BASE_URL}{WEBHOOK_PATH}')
     await bot.set_webhook(f"{BASE_URL}{WEBHOOK_PATH}")
     await bot.send_message(chat_id=ADMIN_ID, text='Bot is activated')
 
@@ -24,7 +26,7 @@ async def on_shutdown() -> None:
     await bot.session.close()
 
 
-async def main() -> None:
+def main() -> None:
 
     dp.include_router(router)
 
